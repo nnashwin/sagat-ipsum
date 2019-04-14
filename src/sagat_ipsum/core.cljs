@@ -3,7 +3,7 @@
 
 (enable-console-print!)
 
-(def sagat-words ["TIGER" "UPPERCUT" "KNEE" "DESTRUCTION" "KNEE" "GENOCIDE"])
+(def sagat-words ["TIGER UPPERCUT!" "TIGER KNEE!" "TIGER DESTRUCTION!" "TIGER GENOCIDE!"])
 
 (def latin-words ["arcu" "nibh" "quam" "quis" "pulvinar" "tincidunt" "Quis" "amet,"
   "enim"
@@ -78,14 +78,46 @@
   "nulla" 
   "pharetra"])
 
-(loop [x 99]
-  (when (> x 1)
-    (println 
-      (nth latin-words
-                  (int (rand 79))))
-    (recur (- x 2))))
+(def para-num 4)
 
-(println (count sagat-words))
+(def sentence-len-vector [3 4 5])
+
+;; (defn which-word-append [calcd-num]
+;;   (let [rand-num (rand)])
+;;   (if (> rand-num tiger-perc)
+;;   "TIGER!")
+;;   (get sagat-words
+;;        (int (rand 
+;;          (count sagat-words)))))
+
+(defn print-sentence [word-count]
+    (loop [x word-count
+           build-str ""]
+      (if (> x 0)
+        (do
+          (recur (- x 1) (str build-str (str (get sagat-words 
+                                              (int (rand 
+                                                     (count sagat-words)))) " "))))
+        build-str)))
+
+(defn print-paragraph [param-num]
+    (loop [x param-num 
+           build-str ""]
+      (if (> x 0)
+        (do 
+          (recur (- x 1) (str build-str (print-sentence (get sentence-len-vector
+                                                             (int (rand
+                                                                    (count sentence-len-vector))))))))
+        build-str)))
+
+(println (print-paragraph 1))
+(println (print-paragraph 1))
+(println (print-paragraph 1))
+(println (print-paragraph 1))
+(println (print-paragraph 1))
+(println (print-paragraph 1))
+(println (print-paragraph 1))
+
 
 (defonce app-state (atom {:text "Hello world!"}))
 
