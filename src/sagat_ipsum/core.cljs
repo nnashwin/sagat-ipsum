@@ -113,7 +113,6 @@
 
 (println (count (str/split (print-paragraph 3) #" ")))
 
-
 (defonce app-state (atom {:text "Hello world!"}))
 
 
