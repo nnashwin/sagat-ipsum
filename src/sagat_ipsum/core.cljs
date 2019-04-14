@@ -1,5 +1,5 @@
 (ns sagat-ipsum.core
-    (:require ))
+    (:require [clojure.string :as str]))
 
 (enable-console-print!)
 
@@ -80,43 +80,38 @@
 
 (def para-num 4)
 
-(def sentence-len-vector [3 4 5])
+(def sentence-len-vector [5 6 7])
 
-;; (defn which-word-append [calcd-num]
-;;   (let [rand-num (rand)])
-;;   (if (> rand-num tiger-perc)
-;;   "TIGER!")
-;;   (get sagat-words
-;;        (int (rand 
-;;          (count sagat-words)))))
+(def tiger-perc 0.8)
+
+(defn which-word-append [rand-num]
+  (if (> tiger-perc rand-num)
+    "TIGER!" (get sagat-words
+      (int (rand 
+        (count sagat-words))))))
+
+
 
 (defn print-sentence [word-count]
     (loop [x word-count
            build-str ""]
       (if (> x 0)
         (do
-          (recur (- x 1) (str build-str (str (get sagat-words 
-                                              (int (rand 
-                                                     (count sagat-words)))) " "))))
+          (recur (- x 1) (str build-str (str (which-word-append (rand)) " "))))
         build-str)))
 
 (defn print-paragraph [param-num]
     (loop [x param-num 
-           build-str ""]
+           str-vec []]
       (if (> x 0)
         (do 
-          (recur (- x 1) (str build-str (print-sentence (get sentence-len-vector
+          (println str-vec)
+          (recur (- x 1) (conj str-vec (print-sentence (get sentence-len-vector
                                                              (int (rand
                                                                     (count sentence-len-vector))))))))
-        build-str)))
+        str-vec)))
 
-(println (print-paragraph 1))
-(println (print-paragraph 1))
-(println (print-paragraph 1))
-(println (print-paragraph 1))
-(println (print-paragraph 1))
-(println (print-paragraph 1))
-(println (print-paragraph 1))
+(println (count (str/split (print-paragraph 3) #" ")))
 
 
 (defonce app-state (atom {:text "Hello world!"}))
