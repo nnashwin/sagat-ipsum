@@ -80,7 +80,7 @@
 
 (def para-num 4)
 
-(def sentence-len-vector [5 6 7])
+(def sentence-len-vector [8 9 10])
 
 (def tiger-perc 0.8)
 
@@ -90,15 +90,13 @@
       (int (rand 
         (count sagat-words))))))
 
-
-
 (defn print-sentence [word-count]
     (loop [x word-count
-           build-str ""]
+           str-vec []]
       (if (> x 0)
         (do
-          (recur (- x 1) (str build-str (str (which-word-append (rand)) " "))))
-        build-str)))
+          (recur (- x 1) (conj str-vec (str (which-word-append (rand)) " "))))
+        str-vec)))
 
 (defn print-paragraph [param-num]
     (loop [x param-num 
@@ -111,7 +109,8 @@
                                                                     (count sentence-len-vector))))))))
         str-vec)))
 
-(println (count (str/split (print-paragraph 3) #" ")))
+(println (which-word-append (rand)) " ")
+(println (count (print-paragraph 4 #" ")))
 
 (defonce app-state (atom {:text "Hello world!"}))
 
