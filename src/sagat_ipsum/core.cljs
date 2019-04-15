@@ -117,6 +117,12 @@
     "I have " [:strong "bold"]
     [:span {:style {:color "red"}} " and red "] "text."]])
 
+
+(defn background []
+  [:div {:style 
+         {:background-color "red" :height "100vh" :width "100vw"}}])
+
+
 (defonce app-state (atom {:text "Hello world!"}))
 
 
@@ -127,5 +133,5 @@
 )
 
 (defn ^:export run []
-  (r/render [simple-component]
+  (r/render [background]
             (js/document.getElementById "app")))
