@@ -120,7 +120,17 @@
 
 (defn background []
   [:div {:style 
-         {:background-color "red" :height "100vh" :width "100vw"}}])
+         {:background-color "#F70713" :height "100vh" :width "100vw"}}])
+
+(defn sagat-overlay[]
+  [:div {:style 
+         {:background-color "#7C35FA" :height "50vh" :width "100vw"}}])
+
+(defn sagat-ipsum-app []
+  [:div#background {:style {:background-color "#F70713" :height "100vh" :width "100vw"}}
+    [:section#sagat-overlay {:style 
+         {:background-color "#7C35FA" :height "30vh" :width "100vw"}}]
+   ])
 
 
 (defonce app-state (atom {:text "Hello world!"}))
@@ -133,5 +143,5 @@
 )
 
 (defn ^:export run []
-  (r/render [background]
+  (r/render [sagat-ipsum-app]
             (js/document.getElementById "app")))
