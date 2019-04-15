@@ -1,5 +1,6 @@
 (ns sagat-ipsum.core
-    (:require [clojure.string :as str]))
+    (:require [clojure.string :as str]
+              [reagent.core :as r]))
 
 (enable-console-print!)
 
@@ -109,8 +110,12 @@
                                                                     (count sentence-len-vector))))))))
         str-vec)))
 
-(println (which-word-append (rand)) " ")
-(println (count (print-paragraph 4 #" ")))
+(defn simple-component []
+  [:div
+   [:p "I am a component!"]
+   [:p.someclass
+    "I have " [:strong "bold"]
+    [:span {:style {:color "red"}} " and red "] "text."]])
 
 (defonce app-state (atom {:text "Hello world!"}))
 
@@ -120,3 +125,7 @@
   ;; your application
   ;; (swap! app-state update-in [:__figwheel_counter] inc)
 )
+
+(defn ^:export run []
+  (r/render [simple-component]
+            (js/document.getElementById "app")))
