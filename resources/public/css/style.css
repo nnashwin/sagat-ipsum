@@ -2,4 +2,11 @@
 * {
   box-sizing: border-box;
   margin: 0;
+  font-family: 'Poppins';
+}
+
+div#top {
+  background-color "#F70713";
+  height "20px";
+  width "100%";
 }
