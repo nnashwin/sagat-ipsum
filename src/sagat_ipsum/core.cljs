@@ -85,6 +85,11 @@
 
 (def tiger-perc 0.8)
 
+(def colors {:trunks "#7C35FA"
+             :sagat-red "#F70713"
+             :sand "#FCC86F"
+             :scar "#B27B1B"})
+
 (defn which-word-append [rand-num]
   (if (> tiger-perc rand-num)
     "TIGER!" (get sagat-words
@@ -120,16 +125,16 @@
 
 (defn background []
   [:div {:style 
-         {:background-color "#F70713" :height "100vh" :width "100vw"}}])
+         {:background-color (:sagat-red colors) :height "100vh" :width "100vw"}}])
 
 (defn sagat-overlay[]
-  [:div {:style 
-         {:background-color "#7C35FA" :height "50vh" :width "100vw"}}])
+  [:section#sagat-overlay {:style 
+         {:background-color (:trunks colors) :height "147px" :width "100vw" :font-size "3rem"}} "SAGAT IPSUM"])
 
 (defn sagat-ipsum-app []
-  [:div#background {:style {:background-color "#F70713" :height "100vh" :width "100vw"}}
-    [:section#sagat-overlay {:style 
-         {:background-color "#7C35FA" :height "30vh" :width "100vw"}}]
+  [:div
+    [:div#top {:style {:background-color (:sagat-red colors) :height "20px" :width "100vw"}}]
+    [sagat-overlay]
    ])
 
 
