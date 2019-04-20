@@ -122,6 +122,9 @@
     "I have " [:strong "bold"]
     [:span {:style {:color "red"}} " and red "] "text."]])
 
+(defn text-padding []
+  "1rem")
+
 
 (defn background []
   [:div {:style 
@@ -129,12 +132,26 @@
 
 (defn sagat-overlay[]
   [:section#sagat-overlay {:style 
-         {:background-color (:trunks colors) :height "147px" :width "100vw" :font-size "3rem"}} "SAGAT IPSUM"])
+         {:background-color (:trunks colors) :height "147px" :width "100vw" :font-size "2rem" :padding-top "1.5rem" :padding-left "1rem"}} 
+        [:h1 "SAGAT IPSUM"]
+        [:h4 {:style {:margin-top "-18px"}} "In Shadaloo, I am the Ipsum."]])
 
 (defn sagat-ipsum-app []
   [:div
-    [:div#top {:style {:background-color (:sagat-red colors) :height "20px" :width "100vw"}}]
+    [:div#top {:style {:background-color (:sagat-red colors) :height "30px" :width "100vw"}}]
     [sagat-overlay]
+    [:div#bottom {:style {:background-color (:sagat-red colors) :height "75vh" :width "100vw"}}
+     [:div#form-left
+      [:h3 "No, motherfucker"]
+      [:div
+        [:label
+          "How many paragraphs?"
+          [:input {:type "text"}]
+        ]
+      ]
+      [:button "Generate it."]
+      [:button "Clear text."]]
+     ]
    ])
 
 
