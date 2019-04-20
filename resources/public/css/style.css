@@ -6,7 +6,12 @@
 }
 
 div#top {
-  background-color "#F70713";
-  height "20px";
-  width "100%";
+  padding-left: 1rem;
+  background-color: #F70713;
+  height 20px;
+  width 100%;
+}
+
+#form-left {
+	padding-left: 1rem;
 }
