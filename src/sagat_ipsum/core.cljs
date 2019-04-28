@@ -79,7 +79,7 @@
   "nulla" 
   "pharetra"])
 
-(def para-num 4)
+(def para-num (r/atom 0))
 
 (def sentence-len-vector [8 9 10])
 
@@ -122,10 +122,6 @@
     "I have " [:strong "bold"]
     [:span {:style {:color "red"}} " and red "] "text."]])
 
-(defn text-padding []
-  "1rem")
-
-
 (defn background []
   [:div {:style 
          {:background-color (:sagat-red colors) :height "100vh" :width "100vw"}}])
@@ -136,23 +132,31 @@
         [:h1 "SAGAT IPSUM"]
         [:h4 {:style {:margin-top "-18px"}} "In Shadaloo, I am the Ipsum."]])
 
+(defn handle-generate-on-click [e]
+  (.preventDefault e)
+  (println @para-num))
+
+(defn how-many-paragraphs-form []
+  [:form
+   [:div
+    [:label
+     "How many paragraphs?"
+     [:input {:type "text"
+              :value @para-num
+              :on-change #(reset! para-num (-> % .-target .-value))}]
+     ]
+    ]
+   [:button {:on-click (fn [e] (handle-generate-on-click e))} "Generate it."]
+   [:button "Clear text."]])
+
 (defn sagat-ipsum-app []
   [:div
     [:div#top {:style {:background-color (:sagat-red colors) :height "30px" :width "100vw"}}]
     [sagat-overlay]
     [:div#bottom {:style {:background-color (:sagat-red colors) :height "75vh" :width "100vw"}}
-     [:div#form-left
+    [:div#form-left
       [:h3 "No, motherfucker"]
-      [:div
-        [:label
-          "How many paragraphs?"
-          [:input {:type "text"}]
-        ]
-      ]
-      [:button "Generate it."]
-      [:button "Clear text."]]
-     ]
-   ])
+      [how-many-paragraphs-form]]]])
 
 
 (defonce app-state (atom {:text "Hello world!"}))
