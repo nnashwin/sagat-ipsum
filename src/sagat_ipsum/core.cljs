@@ -132,9 +132,13 @@
         [:h1 "SAGAT IPSUM"]
         [:h4 {:style {:margin-top "-18px"}} "In Shadaloo, I am the Ipsum."]])
 
-(defn handle-generate-on-click [e]
+(defn handle-generate-click [e]
   (.preventDefault e)
   (println @para-num))
+
+(defn handle-clear-text-click [e]
+  (.preventDefault e)
+  (reset! para-num 0))
 
 (defn how-many-paragraphs-form []
   [:form
@@ -146,8 +150,8 @@
               :on-change #(reset! para-num (-> % .-target .-value))}]
      ]
     ]
-   [:button {:on-click (fn [e] (handle-generate-on-click e))} "Generate it."]
-   [:button "Clear text."]])
+   [:button {:on-click (fn [e] (handle-generate-click e))} "Generate it."]
+   [:button {:on-click (fn [e] (handle-clear-text-click e))} "Clear text."]])
 
 (defn sagat-ipsum-app []
   [:div
