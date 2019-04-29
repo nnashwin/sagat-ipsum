@@ -81,6 +81,8 @@
 
 (def para-num (r/atom 0))
 
+(def generated-text (r/atom "cookies"))
+
 (def sentence-len-vector [8 9 10])
 
 (def tiger-perc 0.8)
@@ -115,10 +117,6 @@
                                                                     (count sentence-len-vector))))))))
         str-vec)))
 
-(defn background []
-  [:div {:style 
-         {:background-color (:sagat-red colors) :height "100vh" :width "100vw"}}])
-
 (defn sagat-overlay[]
   [:section#sagat-overlay {:style 
          {:background-color (:trunks colors) :height "147px" :width "100vw" :font-size "2rem" :padding-top "1.5rem" :padding-left "1rem"}} 
@@ -127,7 +125,8 @@
 
 (defn handle-generate-click [e]
   (.preventDefault e)
-  (println @para-num))
+  (println @para-num)
+  (println (print-paragraph @para-num)))
 
 (defn handle-clear-text-click [e]
   (.preventDefault e)
@@ -154,7 +153,8 @@
     [:div#form-left
       [:h3 "No, motherfucker"]
       [how-many-paragraphs-form]
-      [:textarea#generated-text "cookies"]]]])
+      [:textarea#generated-text {:value @generated-text
+                                 :on-change #(reset! generated-text (-> % .-target .-value))}]]]])
 
 
 (defonce app-state (atom {:text "Hello world!"}))
