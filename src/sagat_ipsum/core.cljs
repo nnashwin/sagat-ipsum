@@ -115,13 +115,6 @@
                                                                     (count sentence-len-vector))))))))
         str-vec)))
 
-(defn simple-component []
-  [:div
-   [:p "I am a component!"]
-   [:p.someclass
-    "I have " [:strong "bold"]
-    [:span {:style {:color "red"}} " and red "] "text."]])
-
 (defn background []
   [:div {:style 
          {:background-color (:sagat-red colors) :height "100vh" :width "100vw"}}])
@@ -160,7 +153,8 @@
     [:div#bottom {:style {:background-color (:sagat-red colors) :height "75vh" :width "100vw"}}
     [:div#form-left
       [:h3 "No, motherfucker"]
-      [how-many-paragraphs-form]]]])
+      [how-many-paragraphs-form]
+      [:textarea#generated-text "cookies"]]]])
 
 
 (defonce app-state (atom {:text "Hello world!"}))
