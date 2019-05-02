@@ -6,7 +6,7 @@
 
 (def sagat-words ["TIGER UPPERCUT!" "TIGER KNEE!" "TIGER DESTRUCTION!" "TIGER GENOCIDE!"])
 
-(def latin-words ["arcu" "nibh" "quam" "quis" "pulvinar" "tincidunt" "Quis" "amet,"
+(def latin-words ["arcu" "nibh" "quam" "quis" "pulvinar" "tincidunt" "Quis" "amet"
   "enim"
   "Hac"
   "pulvinar"
@@ -51,7 +51,7 @@
   "do"
   "integer"
   "sed"
-  "elit,"
+  "elit"
   "etiam"
   "neque"
   "purus"
@@ -81,7 +81,7 @@
 
 (def para-num (r/atom 0))
 
-(def generated-text (r/atom "cookies"))
+(def generated-text (r/atom ""))
 
 (def sentence-len-vector [8 9 10])
 
@@ -111,7 +111,6 @@
            str-vec []]
       (if (> x 0)
         (do 
-          (println str-vec)
           (recur (- x 1) (conj str-vec (print-sentence (get sentence-len-vector
                                                              (int (rand
                                                                     (count sentence-len-vector))))))))
@@ -125,12 +124,19 @@
 
 (defn handle-generate-click [e]
   (.preventDefault e)
-  (println @para-num)
-  (println (print-paragraph @para-num)))
+  (let [generated-text-str (atom "")]
+    (doseq [v (print-paragraph @para-num)]
+  ;; convert the vectors into an spaced, appended string
+          (reset! generated-text-str (str @generated-text-str (clojure.string/join v) "\n\n")))
+    (reset! generated-text (add-start-end-text @generated-text-str))))
 
 (defn handle-clear-text-click [e]
   (.preventDefault e)
-  (reset! para-num 0))
+  (reset! para-num 0)
+  (reset! generated-text ""))
+
+(defn add-start-end-text [input-str]
+  (str "<--start sagat-ipsum code-->\n\n" input-str "<--end sagat-ipsum code-->"))
 
 (defn how-many-paragraphs-form []
   [:form
@@ -158,13 +164,6 @@
 
 
 (defonce app-state (atom {:text "Hello world!"}))
-
-
-(defn on-js-reload []
-  ;; optionally touch your app-state to force rerendering depending on
-  ;; your application
-  ;; (swap! app-state update-in [:__figwheel_counter] inc)
-)
 
 (defn ^:export run []
   (r/render [sagat-ipsum-app]
