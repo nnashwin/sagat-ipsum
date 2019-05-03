@@ -144,6 +144,7 @@
     [:label
      "How many paragraphs?"
      [:input {:type "text"
+              :style { :width "1.5rem" :margin-left "9.35rem" :text-align "center" }
               :value @para-num
               :on-change #(reset! para-num (-> % .-target .-value))}]
      ]
@@ -159,7 +160,8 @@
     [:div#form-left
       [:h3 "No, motherfucker"]
       [how-many-paragraphs-form]
-      [:textarea#generated-text {:value @generated-text
+      [:textarea#generated-text {:style { :min-width "23rem" :min-height "8rem" :margin-top "1rem" }
+                                 :value @generated-text
                                  :on-change #(reset! generated-text (-> % .-target .-value))}]]]])
 
 
