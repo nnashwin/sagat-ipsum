@@ -119,8 +119,8 @@
 (defn sagat-overlay[]
   [:section#sagat-overlay {:style 
          {:background-color (:trunks colors) :height "147px" :width "100vw" :font-size "2rem" :padding-top "1.5rem" :padding-left "1rem"}} 
-        [:h1 "SAGAT IPSUM"]
-        [:h4 {:style {:margin-top "-18px"}} "In Shadaloo, I am the Ipsum."]])
+        [:h1 {:style {:margin "-18px auto 0" :width "900px"}} "SAGAT IPSUM"]
+        [:h4 {:style {:margin "-18px auto 0" :width "900px"}} "In Shadaloo, I am the Ipsum."]])
 
 (defn handle-generate-click [e]
   (.preventDefault e)
@@ -153,16 +153,18 @@
    [:button {:on-click (fn [e] (handle-clear-text-click e))} "Clear text."]])
 
 (defn sagat-ipsum-app []
-  [:div
+  [:div {:style {:height "100%" :background-color (:sagat-red colors)}}
     [:div#top {:style {:background-color (:sagat-red colors) :height "30px" :width "100vw"}}]
     [sagat-overlay]
     [:div#bottom {:style {:background-color (:sagat-red colors) :height "75vh" :width "100vw"}}
-    [:div#form-left
-      [:h3 "No, motherfucker"]
-      [how-many-paragraphs-form]
-      [:textarea#generated-text {:style { :min-width "23rem" :min-height "8rem" :margin-top "1rem" }
-                                 :value @generated-text
-                                 :on-change #(reset! generated-text (-> % .-target .-value))}]]]])
+      [:div#form-left {:style {:float "left"}}
+        [:h3 "No, motherfucker"]
+        [how-many-paragraphs-form]
+        [:textarea#generated-text {:style { :min-width "23rem" :min-height "8rem" :margin-top "1rem" }
+                                   :value @generated-text
+                                   :on-change #(reset! generated-text (-> % .-target .-value))}]]
+      [:div#form-right {:style {:float "right"}}
+       [:img { :src "http://lorempixel.com/400/200"}]]]])
 
 
 (defonce app-state (atom {:text "Hello world!"}))
