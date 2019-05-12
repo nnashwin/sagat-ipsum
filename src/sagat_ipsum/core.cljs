@@ -1,83 +1,12 @@
 (ns sagat-ipsum.core
     (:require [clojure.string :as str]
-              [reagent.core :as r]))
+              [reagent.core :as r]
+              [sagat_ipsum.dict :as d]))
 
 (enable-console-print!)
 
-(def sagat-words ["TIGER UPPERCUT!" "TIGER KNEE!" "TIGER DESTRUCTION!" "TIGER GENOCIDE!"])
-
-(def latin-words ["arcu" "nibh" "quam" "quis" "pulvinar" "tincidunt" "Quis" "amet"
-  "enim"
-  "Hac"
-  "pulvinar"
-  "tellus"
-  "consectetur"
-  "netus"
-  "fames"
-  "tempor"
-  "lacinia"
-  "faucibus"
-  "euismod"
-  "tristique"
-  "platea"
-  "viverra"
-  "id"
-  "volutpat"
-  "ac" "senectus"
-  "odio"
-  "nunc"
-  "sem"
-  "tincidunt"
-  "aliqua"
-  "ut"
-  "gravida"
-  "Aliquet"
-  "eu"
-  "Arcu"
-  "adipiscing"
-  "incididunt"
-  "praesent"
-  "Tristique"
-  "sit"
-  "elementum"
-  "habitasse"
-  "Lorem"
-  "Dui"
-  "massa"
-  "labore"
-  "eiusmod"
-  "Elementum"
-  "non"
-  "do"
-  "integer"
-  "sed"
-  "elit"
-  "etiam"
-  "neque"
-  "purus"
-  "et"
-  "Auctor"
-  "ornare"
-  "magna"
-  "sagittis"
-  "malesuada"
-  "mauris"
-  "dolore"
-  "amet"
-  "ipsum"
-  "Risus"
-  "dictumst"
-  "Rutrum"
-  "quisque"
-  "augue"
-  "dolor"
-  "at" 
-  "Id"
-  "pellentesque"
-  "in" 
-  "imperdiet" 
-  "nulla" 
-  "pharetra"])
+;; convert js obj to clj vector and ensure it has keys
+(def dict (js->clj sagat_ipsum/dict :keywordize-keys true))
 
 (def para-num (r/atom 0))
 
@@ -94,9 +23,9 @@
 
 (defn which-word-append [rand-num]
   (if (> tiger-perc rand-num)
-    "TIGER!" (get sagat-words
+    "TIGER!" (get (:sagat_words dict)
       (int (rand 
-        (count sagat-words))))))
+        (count (:sagat_words dict)))))))
 
 (defn print-sentence [word-count]
     (loop [x word-count
