@@ -21,6 +21,9 @@
              :sand "#FCC86F"
              :scar "#B27B1B"})
 
+(def standard-styles {:text-padding "1rem"
+                      :container-width "900px"})
+
 (defn which-word-append [rand-num]
   (if (> tiger-perc rand-num)
     "TIGER!" (get (:sagat_words dict)
@@ -68,7 +71,7 @@
   (str "<--start sagat-ipsum code-->\n\n" input-str "<--end sagat-ipsum code-->"))
 
 (defn how-many-paragraphs-form []
-  [:form
+  [:form {:style {:padding-left (:text-padding standard-styles)}}
    [:div
     [:label
      "How many paragraphs?"
@@ -86,8 +89,8 @@
     [:div#top {:style {:background-color (:sagat-red colors) :height "30px" :width "100vw"}}]
     [sagat-overlay]
     [:div#bottom {:style {:background-color (:sagat-red colors) :height "75vh" :width "100vw"}}
-      [:div#form-left {:style {:float "left"}}
-        [:h3 "No, motherfucker"]
+      [:div {:style {:width (:container-width standard-styles) :margin "0 auto"}}
+        [:h3 {:style {:padding-left (:text-padding standard-styles)}} "No, motherfucker"]
         [how-many-paragraphs-form]
         [:textarea#generated-text {:style { :min-width "23rem" :min-height "8rem" :margin-top "1rem" }
                                    :value @generated-text
