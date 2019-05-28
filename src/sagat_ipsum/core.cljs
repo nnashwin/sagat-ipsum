@@ -81,23 +81,24 @@
               :on-change #(reset! para-num (-> % .-target .-value))}]
      ]
     ]
-   [:button {:on-click (fn [e] (handle-generate-click e))} "Generate it."]
-   [:button {:on-click (fn [e] (handle-clear-text-click e))} "Clear text."]])
+   [:div {:style {:margin-top "1rem"}}
+     [:button {:on-click (fn [e] (handle-generate-click e))} "Generate it."]
+     [:button {:on-click (fn [e] (handle-clear-text-click e)) :style {:margin-left "1rem"}} "Clear text."]
+   ]])
 
 (defn sagat-ipsum-app []
   [:div {:style {:height "100%" :background-color (:sagat-red colors)}}
     [:div#top {:style {:background-color (:sagat-red colors) :height "30px" :width "100vw"}}]
     [sagat-overlay]
     [:div#bottom {:style {:background-color (:sagat-red colors) :height "75vh" :width "100vw"}}
-      [:div {:style {:width (:container-width standard-styles) :margin "0 auto"}}
-        [:h3 {:style {:padding-left (:text-padding standard-styles)}} "No, motherfucker"]
-        [how-many-paragraphs-form]
-        [:textarea#generated-text {:style { :min-width "23rem" :min-height "8rem" :margin-top "1rem" }
-                                   :value @generated-text
-                                   :on-change #(reset! generated-text (-> % .-target .-value))}]]
-      [:div#form-right {:style {:float "right"}}
-       [:img { :src "http://lorempixel.com/400/200"}]]]])
-
+      [:div {:style {:width "913px" :margin "0 auto"}}
+        [:div#form-right {:style {:float "right"}}
+          [:img { :src "http://lorempixel.com/400/200"}]]
+       [:h3 {:style {:padding-left (:text-padding standard-styles)}} "No, motherfucker"]
+       [how-many-paragraphs-form]
+       [:textarea#generated-text {:style { :min-width "23rem" :min-height "8rem" :margin "2rem 0 0 1rem" }
+                                  :value @generated-text
+                                  :on-change #(reset! generated-text (-> % .-target .-value))}]]]])
 
 (defonce app-state (atom {:text "Hello world!"}))
 
